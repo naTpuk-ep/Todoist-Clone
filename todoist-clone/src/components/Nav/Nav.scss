@@ -1,0 +1,22 @@
+.Nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #4f4f4f;
+  min-width: 320px;
+  nav {
+    height: 100%;
+    ul {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      list-style: none;
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+}

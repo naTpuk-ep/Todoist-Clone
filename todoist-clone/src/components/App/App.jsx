@@ -1,30 +1,33 @@
-import './App.scss';
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import styles from './App.module.scss';
+
 import Header from '../Header';
-import BurgerMenu from '../BurgerMenu';
-import { useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import Nav from '../Nav';
+import Main from '../../pages/Main';
 import Today from '../../pages/Today';
 import Upcoming from '../../pages/Upcoming';
 
 function App() {
-  const [ path ] = useState({
-		today: '/today',
-		upcoming: '/upcoming'
-	});
-
   return (
-    <div className='App'>
-      <Header />
-      <main>
-        <div className = "routes">
-          <Switch>
-            <Route path = {path.today} exact component={Today} />
-            <Route path = {path.upcoming} exact component={Upcoming} />
-          </Switch>
-				</div>
-      </main>
-      <BurgerMenu path = {path}/>
-    </div>
+    <BrowserRouter>
+      <div className={`App ${styles.App}`}>
+        <Header />
+        <Nav />
+        <Switch>
+          <Route exact path='/'>
+            <Main />
+          </Route>
+          <Route path='/today'>
+            <Today />
+          </Route>
+          <Route path='/upcoming'>
+            <Upcoming />
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
