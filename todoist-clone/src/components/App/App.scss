@@ -1,3 +1,5 @@
+@import 'materialize-css/dist/css/materialize.min.css';
+
 body {
   margin: 0;
   padding: 0;
@@ -7,4 +9,5 @@ body {
 .App {
   width: 100%;
   text-align: center;
+  position: relative;
 }
