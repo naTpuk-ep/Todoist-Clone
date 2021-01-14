@@ -1,0 +1,20 @@
+.Modal {
+  background-color: #fff;
+  width: 50vw;
+  height: 20vh;
+
+  position: fixed;
+  margin: auto;
+
+  bottom: -20vh;
+  left: 0;
+  right: 0;
+}
+
+.Modal_show {
+  background-color: #fff;
+  position: fixed;
+
+  bottom: 50vh;
+  z-index: 1;
+}
