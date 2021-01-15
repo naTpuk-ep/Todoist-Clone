@@ -19,8 +19,6 @@ function App(props) {
   const dbUrl = `https://rs-clone-be.herokuapp.com/todoist`;
 
   useEffect(() => {
-    const prevTodos = localStorage.getItem('todos') || [];
-    JSON.parse(prevTodos).forEach((el) => createTodo(el));
 
     const getDB = async () => {
       try {
@@ -37,7 +35,6 @@ function App(props) {
   }, [createTodo, dbUrl]);
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
 
     const updateDB = async (data) => {
       try {
