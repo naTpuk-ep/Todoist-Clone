@@ -13,16 +13,17 @@ import Today from '../../pages/Today';
 import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
 
+require('dotenv').config();
+
 function App(props) {
   const { todos, createTodo } = props;
-  const userId = '422e742a-e729-4889-94e7-44327f68e68f';
-  const dbUrl = `https://rs-clone-be.herokuapp.com/todoist`;
+  const { REACT_APP_USER_ID, REACT_APP_BASE_URL } = process.env;
 
   useEffect(() => {
 
     const getDB = async () => {
       try {
-        const res = await axios.get(`${dbUrl}/${userId}`)
+        const res = await axios.get(`${REACT_APP_BASE_URL}/${REACT_APP_USER_ID}`)
         console.log(res.data);
         const prevTodos = res.data.data || '[]';
         JSON.parse(prevTodos).forEach((el) => createTodo(el));
@@ -32,14 +33,14 @@ function App(props) {
       }
     }
     getDB();
-  }, [createTodo, dbUrl]);
+  }, [createTodo, REACT_APP_BASE_URL, REACT_APP_USER_ID]);
 
   useEffect(() => {
 
     const updateDB = async (data) => {
       try {
-        await axios.put(`${dbUrl}/${userId}`, {data: JSON.stringify(data)});
-        const res = await axios.get(dbUrl);
+        await axios.put(`${REACT_APP_BASE_URL}/${REACT_APP_USER_ID}`, {data: JSON.stringify(data)});
+        const res = await axios.get(REACT_APP_BASE_URL);
         console.log(res.data);
         console.log(JSON.parse(res.data[res.data.length - 1].data));
         console.log('put');
@@ -49,7 +50,7 @@ function App(props) {
     }
     updateDB(todos);
 
-  }, [todos, dbUrl]);
+  }, [todos, REACT_APP_BASE_URL, REACT_APP_USER_ID]);
 
   const showModal = () => {
     const modal = document.querySelector('.Modal');
