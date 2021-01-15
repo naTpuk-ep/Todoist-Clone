@@ -22,6 +22,8 @@ class Modal extends React.Component {
       createTodo(newTodo);
       this.setState({ title: '' });
       this.props.closeModal();
+    } else {
+      this.props.closeModal();
     }
   };
 
