@@ -17,7 +17,12 @@ import All from '../../pages/All';
 import Today from '../../pages/Today';
 import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
+import Login from '../Login';
+import Register from '../Register';
 import { todosData } from '../../persistance/network';
+
+require('dotenv').config();
+export const { REACT_APP_USER_ID, REACT_APP_BASE_URL } = process.env;
 
 function App(props) {
   const {
