@@ -1,8 +1,9 @@
 import React from 'react';
 import TodoItem from '../TodoItem';
+import { connect } from 'react-redux';
 
 function TodoList(props) {
-  const { todos, groupProps } = props;
+  const { todos } = props;
 
   if (!todos.length) {
     return (
@@ -21,4 +22,10 @@ function TodoList(props) {
   );
 }
 
-export default TodoList;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos.todos,
+  };
+};
+
+export default connect(mapStateToProps)(TodoList);

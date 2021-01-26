@@ -1,28 +1,16 @@
 .TodoItem {
   margin-bottom: 10px;
-  margin: 10px auto;
-  width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #f3f3f3;
-  padding: 1rem;
-
-  label,
-  i {
-    cursor: pointer;
-  }
-
   label {
-    input {
-      border-radius: 50%;
-    }
-    .title {
-      color: black;
-    }
-    .title.completed {
-      color: grey;
-      text-decoration: line-through;
-    }
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background: #f3f3f3;
+    padding: 1rem;
+  }
+  i {
+    z-index: 2;
   }
 }

@@ -1,16 +1,15 @@
 import React from 'react';
 
 import logo from '../../assets/img/todoist-icon.png';
-import './Header.scss';
+import styles from './Header.module.scss';
 
 function Header(props) {
-  const { showModal, showNav } = props;
-
+  const { showModal } = props;
   return (
-    <header className='Header'>
-      <img src={logo} onClick={() => showNav()} alt='logo' />
+    <header className={`Header ${styles.Header}`}>
+      <img src={logo} alt='logo' />
       <h1>Todoist</h1>
-      <button onClick={() => showModal()}>+</button>
+      <button onClick={showModal}>+</button>
     </header>
   );
 }

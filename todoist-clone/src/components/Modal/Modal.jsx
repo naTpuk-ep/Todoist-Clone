@@ -8,14 +8,14 @@ import './Modal.scss';
 function Modal (props) {
   let title = '';
 
-  submitHandler = async (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     if (title.length) {
       const { createTodo } = props;
       const newTodo = {
         id: new Date().getTime(),
         title,
-        completed: false,
+        done: false,
       };
       await todosData.create(newTodo);
       createTodo(newTodo);
@@ -29,28 +29,22 @@ function Modal (props) {
     title = event.target.value;
   };
 
-  render() {
-    const { modalClassName } = this.props;
-
-    return (
-      <div className={modalClassName}>
-        <form onSubmit={this.submitHandler}>
-          <label htmlFor='title'> Add new ToDo</label>
-          <input
-            type='text'
-            id='title'
-            value={this.state.title}
-            name='title'
-            onChange={this.changeInputHandler}
-          />
-          <button type='submit'>
-            <i className='material-icons red-text'>done</i>
-          </button>
-        </form>
-      </div>
-    );
-  }
-
+  return (
+    <div className='Modal'>
+      <form onSubmit={submitHandler}>
+        <label htmlFor='title'> Add new ToDo</label>
+        <input
+          type='text'
+          id='title'
+          name='title'
+          onChange={changeInputHandler}
+        />
+        <button type='submit'>
+          <i className='material-icons red-text'>done</i>
+        </button>
+      </form>
+    </div>
+  );
 }
 
 const mapDispatchToProps = {
