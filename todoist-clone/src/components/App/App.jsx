@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createTodo } from '../../redux/actions/actions';
-import axios from 'axios';
 
 import './App.scss';
 import Header from '../Header';
@@ -31,26 +30,12 @@ function App(props) {
         console.log('todos', res);
         const prevTodos = res || [];
         prevTodos.forEach((el) => createTodo(el));
-        // console.log('get');
       } catch (e) {
         console.log(e.message);
       }
     }
     getDB();
   }, [createTodo]);
-
-  // useEffect(() => {
-  //   const updateDB = async (data) => {
-  //     console.log(data);
-  //     try {
-  //       await todosData.create(data[data.length - 1]);
-  //     } catch(e) {
-  //       console.log(e.message);
-  //     }
-  //   }
-  //   updateDB(todos);
-
-  // }, [todos]);
 
   const showModal = () => {
     const modal = document.querySelector('.Modal');

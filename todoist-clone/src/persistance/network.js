@@ -99,7 +99,7 @@ export const todosData = {
 			baseURL,
 			method: 'put',
 			data,
-			url: `/todos/${data.id}`,
+			url: `/todoist/${data.id}`,
 			headers,
 		});
 
@@ -112,7 +112,7 @@ export const todosData = {
 		const response = await axios({
 			baseURL,
 			method: 'delete',
-			url: `/todos/${data.id}`,
+			url: `/todoist/${data.id}`,
 			headers,
 		});
 

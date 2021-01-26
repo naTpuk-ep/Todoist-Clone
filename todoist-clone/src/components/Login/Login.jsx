@@ -1,6 +1,4 @@
-import axios from 'axios';
 import React from 'react';
-import { REACT_APP_BASE_URL } from '../App/App';
 import { auth } from '../../persistance/network';
 
 import './Login.scss';

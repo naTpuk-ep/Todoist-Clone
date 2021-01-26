@@ -1,62 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { todosData } from '../../persistance/network';
 import { createTodo } from '../../redux/actions/actions';
 
 import './Modal.scss';
 
-class Modal extends React.Component {
-  state = {
-    title: '',
-  };
+function Modal (props) {
+  let title = '';
 
-  submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    const { title } = this.state;
     if (title.length) {
-      const { createTodo } = this.props;
+      const { createTodo } = props;
       const newTodo = {
         id: new Date().getTime(),
         title,
         done: false,
       };
+      await todosData.create(newTodo);
       createTodo(newTodo);
-      this.setState({ title: '' });
-      console.log(this.state);
-      this.props.closeModal();
+      props.closeModal();
     } else {
-      this.props.closeModal();
+      props.closeModal();
     }
   };
 
-  changeInputHandler = (event) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      ...{
-        [event.target.name]: event.target.value,
-      },
-    }));
-    console.log(this.state);
+  const changeInputHandler = (event) => {
+    title = event.target.value;
   };
 
-  render() {
-    return (
-      <div className='Modal'>
-        <form onSubmit={this.submitHandler}>
-          <label htmlFor='title'> Add new ToDo</label>
-          <input
-            type='text'
-            id='title'
-            value={this.state.title}
-            name='title'
-            onChange={this.changeInputHandler}
-          />
-          <button type='submit'>
-            <i className='material-icons red-text'>done</i>
-          </button>
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div className='Modal'>
+      <form onSubmit={submitHandler}>
+        <label htmlFor='title'> Add new ToDo</label>
+        <input
+          type='text'
+          id='title'
+          name='title'
+          onChange={changeInputHandler}
+        />
+        <button type='submit'>
+          <i className='material-icons red-text'>done</i>
+        </button>
+      </form>
+    </div>
+  );
 }
 
 const mapDispatchToProps = {
