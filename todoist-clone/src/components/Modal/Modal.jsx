@@ -21,6 +21,7 @@ class Modal extends React.Component {
       };
       createTodo(newTodo);
       this.setState({ title: '' });
+      console.log(this.state);
       this.props.closeModal();
     } else {
       this.props.closeModal();
@@ -31,9 +32,10 @@ class Modal extends React.Component {
     this.setState((prevState) => ({
       ...prevState,
       ...{
-        [event.target.name]: [event.target.value],
+        [event.target.name]: event.target.value,
       },
     }));
+    console.log(this.state);
   };
 
   render() {

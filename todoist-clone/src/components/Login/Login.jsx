@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React from 'react';
 import { REACT_APP_BASE_URL } from '../App/App';
+import { auth } from '../../persistance/network';
 
 import './Login.scss';
 
 function Login () {
-
-	let token = undefined;
 	
 	const loginData = {
 		username: '',
@@ -20,13 +19,9 @@ function Login () {
 	const loginHandler = async () => {
 		console.log('login');
 
-		const headers = {Authorization: token};
-		const auth = await axios.post(`${REACT_APP_BASE_URL}/auth/login`, loginData, {headers});
-
-		if (auth.data.statusCode === 200) {
-			token = auth.data.token;
-		} else {
-			console.log(auth.data.reason);
+		const res = await auth.login(loginData);
+		if (res.statusCode !== 200) {
+			console.log(res.reason);
 		}
 	}
 
@@ -35,10 +30,9 @@ function Login () {
 	}
 
 	const testHandler = async () => {
-		const headers = {Authorization: token};
-		const result = await axios.post(`${REACT_APP_BASE_URL}/auth/test`, undefined, {headers});
+		const result = await auth.test();
 
-		testData.result = result.data.statusCode === 200 ? 'ok' : 'fail';
+		testData.result = result.statusCode === 200 ? 'ok' : 'fail';
 		console.log(testData.result);
 	}
 

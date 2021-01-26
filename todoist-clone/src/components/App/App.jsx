@@ -14,8 +14,11 @@ import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
 import Login from '../Login';
 import Register from '../Register';
+import { todosData } from '../../persistance/network';
 
 require('dotenv').config();
+
+
 export const { REACT_APP_USER_ID, REACT_APP_BASE_URL } = process.env;
 
 function App(props) {
@@ -24,10 +27,10 @@ function App(props) {
   useEffect(() => {
     const getDB = async () => {
       try {
-        const res = await axios.get(`${REACT_APP_BASE_URL}/todoist/${REACT_APP_USER_ID}`);
-        // console.log(res.data);
-        const prevTodos = res.data.data || '[]';
-        JSON.parse(prevTodos).forEach((el) => createTodo(el));
+        const res = await todosData.get();
+        console.log('todos', res);
+        const prevTodos = res || [];
+        prevTodos.forEach((el) => createTodo(el));
         // console.log('get');
       } catch (e) {
         console.log(e.message);
@@ -36,21 +39,18 @@ function App(props) {
     getDB();
   }, [createTodo]);
 
-  useEffect(() => {
-    const updateDB = async (data) => {
-      try {
-        await axios.put(`${REACT_APP_BASE_URL}/todoist/${REACT_APP_USER_ID}`, {data: JSON.stringify(data)});
-        const res = await axios.get(`${REACT_APP_BASE_URL}/todoist`);
-        console.log('put', res.data);
-        // console.log(JSON.parse(res.data[res.data.length - 1].data));
-        // console.log('put');
-      } catch(e) {
-        console.log(e.message);
-      }
-    }
-    updateDB(todos);
+  // useEffect(() => {
+  //   const updateDB = async (data) => {
+  //     console.log(data);
+  //     try {
+  //       await todosData.create(data[data.length - 1]);
+  //     } catch(e) {
+  //       console.log(e.message);
+  //     }
+  //   }
+  //   updateDB(todos);
 
-  }, [todos]);
+  // }, [todos]);
 
   const showModal = () => {
     const modal = document.querySelector('.Modal');
