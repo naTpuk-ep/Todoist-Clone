@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createTodo } from '../../redux/actions/actions';
-import axios from 'axios';
 
 import './App.scss';
 import Header from '../Header';
@@ -12,45 +11,31 @@ import All from '../../pages/All';
 import Today from '../../pages/Today';
 import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
+import Login from '../Login';
+import Register from '../Register';
+import { todosData } from '../../persistance/network';
 
 require('dotenv').config();
 
+
+export const { REACT_APP_USER_ID, REACT_APP_BASE_URL } = process.env;
+
 function App(props) {
   const { todos, createTodo } = props;
-  const { REACT_APP_USER_ID, REACT_APP_BASE_URL } = process.env;
 
   useEffect(() => {
-
     const getDB = async () => {
       try {
-        const res = await axios.get(`${REACT_APP_BASE_URL}/${REACT_APP_USER_ID}`)
-        console.log(res.data);
-        const prevTodos = res.data.data || '[]';
-        JSON.parse(prevTodos).forEach((el) => createTodo(el));
-        console.log('get');
+        const res = await todosData.get();
+        console.log('todos', res);
+        const prevTodos = res || [];
+        prevTodos.forEach((el) => createTodo(el));
       } catch (e) {
         console.log(e.message);
       }
     }
     getDB();
-  }, [createTodo, REACT_APP_BASE_URL, REACT_APP_USER_ID]);
-
-  useEffect(() => {
-
-    const updateDB = async (data) => {
-      try {
-        await axios.put(`${REACT_APP_BASE_URL}/${REACT_APP_USER_ID}`, {data: JSON.stringify(data)});
-        const res = await axios.get(REACT_APP_BASE_URL);
-        console.log(res.data);
-        console.log(JSON.parse(res.data[res.data.length - 1].data));
-        console.log('put');
-      } catch(e) {
-        console.log(e.message);
-      }
-    }
-    updateDB(todos);
-
-  }, [todos, REACT_APP_BASE_URL, REACT_APP_USER_ID]);
+  }, [createTodo]);
 
   const showModal = () => {
     const modal = document.querySelector('.Modal');
@@ -80,6 +65,12 @@ function App(props) {
           </Route>
           <Route path='/upcoming'>
             <Upcoming />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <Route path='/register'>
+            <Register />
           </Route>
         </Switch>
       </div>
