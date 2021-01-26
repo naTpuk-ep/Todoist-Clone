@@ -14,6 +14,12 @@ function Nav(props) {
       <nav>
         <ul>
           <li>
+            <Link to='/login'>Login</Link>
+          </li>
+          <li>
+            <Link to='/register'>Register</Link>
+          </li>
+          <li>
             <Link to='/'>Main</Link>
           </li>
           <li>

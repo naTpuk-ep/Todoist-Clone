@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { todosData } from '../../persistance/network';
 import {
   completeTodo,
   removeTodo,
@@ -8,6 +9,11 @@ import './TodoItem.scss';
 
 function TodoItem(props) {
   const { todo, removeTodo, completeTodo } = props;
+
+  const completeHandler = async (e) => {
+    await todosData.remove(todo);
+    completeTodo(todo);
+  };
 
   let titleClassName = 'title';
   if (todo.completed) {
@@ -20,7 +26,7 @@ function TodoItem(props) {
         <input
           type='checkbox'
           checked={todo.completed}
-          onChange={() => completeTodo(todo)}
+          onChange={completeHandler}
         />
         <span className={titleClassName}>{todo.title}</span>
       </label>

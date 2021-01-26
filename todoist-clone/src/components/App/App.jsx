@@ -17,6 +17,7 @@ import All from '../../pages/All';
 import Today from '../../pages/Today';
 import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
+import { todosData } from '../../persistance/network';
 
 function App(props) {
   const {
@@ -31,13 +32,18 @@ function App(props) {
   } = props;
 
   useEffect(() => {
-    const prevTodos = localStorage.getItem('todos') || [];
-    JSON.parse(prevTodos).forEach((el) => createTodo(el));
+    const getDB = async () => {
+      try {
+        const res = await todosData.get();
+        console.log('todos', res);
+        const prevTodos = res || [];
+        prevTodos.forEach((el) => createTodo(el));
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+    getDB();
   }, [createTodo]);
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
 
   const groupProps = {
     appear: true,
@@ -67,6 +73,12 @@ function App(props) {
             </Route>
             <Route path='/upcoming'>
               <Upcoming />
+            </Route>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/register'>
+              <Register />
             </Route>
           </Switch>
         </div>

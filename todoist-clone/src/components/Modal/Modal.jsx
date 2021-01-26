@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { todosData } from '../../persistance/network';
 import { createTodo } from '../../redux/actions/actions';
 
 import './Modal.scss';
@@ -9,7 +10,7 @@ class Modal extends React.Component {
     title: '',
   };
 
-  submitHandler = (event) => {
+  submitHandler = async (event) => {
     event.preventDefault();
     const { title } = this.state;
     if (title.length) {
@@ -19,6 +20,7 @@ class Modal extends React.Component {
         title,
         completed: false,
       };
+      await todosData.create(newTodo);
       createTodo(newTodo);
       this.setState({ title: '' });
       this.props.closeModal();
