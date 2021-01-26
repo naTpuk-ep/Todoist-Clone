@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 
 import './Nav.scss';
 
-function Nav() {
+function Nav(props) {
+  const { navClassName, closeNav } = props;
+
   return (
-    <div className='Nav'>
+    <div className={navClassName}>
+      <button className='close-btn' onClick={() => closeNav()}>
+        &#65794;{' '}
+      </button>
       <nav>
         <ul>
           <li>

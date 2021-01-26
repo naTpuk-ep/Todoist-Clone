@@ -1,35 +1,47 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { todosData } from '../../persistance/network';
-import { completeTodo } from '../../redux/actions/actions';
+import {
+  completeTodo,
+  removeTodo,
+} from '../../redux/actions/actions';
 import './TodoItem.scss';
 
 function TodoItem(props) {
-  const { todo, completeTodo } = props;
-  console.log(todo);
+  const { todo, removeTodo, completeTodo } = props;
 
   const completeHandler = async (e) => {
     await todosData.remove(todo);
     completeTodo(todo);
+  };
+
+  let titleClassName = 'title';
+  if (todo.completed) {
+    titleClassName += ' completed';
   }
 
   return (
     <div className='TodoItem'>
       <label>
-        <input type='checkbox' />
-        <span id='title'>{todo.title}</span>
-        <i
-          onClick={completeHandler}
-          className='material-icons red-text'
-        >
-          delete
-        </i>
+        <input
+          type='checkbox'
+          checked={todo.completed}
+          onChange={completeHandler}
+        />
+        <span className={titleClassName}>{todo.title}</span>
       </label>
+      <i
+        onClick={() => removeTodo(todo)}
+        className='material-icons red-text'
+      >
+        delete
+      </i>
     </div>
   );
 }
 
 const mapDispatchToProps = {
+  removeTodo,
   completeTodo,
 };
 

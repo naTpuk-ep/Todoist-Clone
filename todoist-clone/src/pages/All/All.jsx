@@ -3,10 +3,12 @@ import './All.scss';
 
 import TodoList from '../../components/TodoList';
 
-function All() {
+function All(props) {
+  const { todos, groupProps } = props;
+
   return (
     <div className='All'>
-      <TodoList />
+      <TodoList todos={todos} groupProps={groupProps} />
     </div>
   );
 }
