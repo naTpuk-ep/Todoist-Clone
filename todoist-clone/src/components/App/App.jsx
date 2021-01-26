@@ -22,6 +22,7 @@ import Register from '../Register';
 import { todosData } from '../../persistance/network';
 
 require('dotenv').config();
+
 export const { REACT_APP_USER_ID, REACT_APP_BASE_URL } = process.env;
 
 function App(props) {

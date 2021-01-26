@@ -5,16 +5,13 @@ import { createTodo } from '../../redux/actions/actions';
 
 import './Modal.scss';
 
-class Modal extends React.Component {
-  state = {
-    title: '',
-  };
+function Modal (props) {
+  let title = '';
 
   submitHandler = async (event) => {
     event.preventDefault();
-    const { title } = this.state;
     if (title.length) {
-      const { createTodo } = this.props;
+      const { createTodo } = props;
       const newTodo = {
         id: new Date().getTime(),
         title,
@@ -22,18 +19,14 @@ class Modal extends React.Component {
       };
       await todosData.create(newTodo);
       createTodo(newTodo);
-      this.setState({ title: '' });
-      this.props.closeModal();
+      props.closeModal();
+    } else {
+      props.closeModal();
     }
   };
 
-  changeInputHandler = (event) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      ...{
-        [event.target.name]: [event.target.value],
-      },
-    }));
+  const changeInputHandler = (event) => {
+    title = event.target.value;
   };
 
   render() {
@@ -57,6 +50,7 @@ class Modal extends React.Component {
       </div>
     );
   }
+
 }
 
 const mapDispatchToProps = {
