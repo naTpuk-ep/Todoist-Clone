@@ -17,7 +17,7 @@ class Modal extends React.Component {
       const newTodo = {
         id: new Date().getTime(),
         title,
-        done: false,
+        completed: false,
       };
       createTodo(newTodo);
       this.setState({ title: '' });
@@ -35,8 +35,10 @@ class Modal extends React.Component {
   };
 
   render() {
+    const { modalClassName } = this.props;
+
     return (
-      <div className='Modal'>
+      <div className={modalClassName}>
         <form onSubmit={this.submitHandler}>
           <label htmlFor='title'> Add new ToDo</label>
           <input
