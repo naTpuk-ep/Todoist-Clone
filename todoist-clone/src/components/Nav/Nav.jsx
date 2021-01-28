@@ -1,23 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { auth } from '../../persistance/network';
+
+import {authorizate} from '../../redux/actions/actions';
 
 import './Nav.scss';
 
 function Nav(props) {
-  const { navClassName, closeNav } = props;
+  const { navClassName, closeNav, authorizate } = props;
+
+  
+	const logoutHandler = () => {
+		auth.setToken(undefined);
+		authorizate(false);
+	}
 
   return (
     <div className={navClassName}>
-      <button className='close-btn' onClick={() => closeNav()}>
+      <button className='close-btn' onClick={closeNav}>
         &#65794;{' '}
       </button>
       <nav>
         <ul>
           <li>
-            <Link to='/login'>Login</Link>
-          </li>
-          <li>
-            <Link to='/register'>Register</Link>
+            <button onClick={logoutHandler}>Logout</button>
           </li>
           <li>
             <Link to='/'>Main</Link>
@@ -37,4 +44,9 @@ function Nav(props) {
   );
 }
 
-export default Nav;
+
+const mapDispatchToProps = {
+	authorizate
+};
+
+export default connect(null, mapDispatchToProps)(Nav);

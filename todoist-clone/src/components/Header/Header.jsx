@@ -8,9 +8,9 @@ function Header(props) {
 
   return (
     <header className='Header'>
-      <img src={logo} onClick={() => showNav()} alt='logo' />
+      <img src={logo} onClick={showNav} alt='logo' />
       <h1>Todoist</h1>
-      <button onClick={() => showModal()}>+</button>
+      <button onClick={showModal}>+</button>
     </header>
   );
 }
