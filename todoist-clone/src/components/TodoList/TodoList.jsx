@@ -2,7 +2,7 @@ import React from 'react';
 import TodoItem from '../TodoItem';
 
 function TodoList(props) {
-  const { todos, groupProps } = props;
+  const { todos } = props;
 
   if (!todos.length) {
     return (

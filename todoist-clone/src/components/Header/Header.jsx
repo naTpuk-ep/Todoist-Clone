@@ -1,6 +1,6 @@
 import React from 'react';
-
 import logo from '../../assets/img/todoist-icon.png';
+
 import './Header.scss';
 
 function Header(props) {

@@ -5,7 +5,6 @@ const initialState = {
 const todosReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_TODO':
-      console.log(action.payload);
       return {
         ...state,
         todos: state.todos.concat([action.payload]).sort((a, b) => {

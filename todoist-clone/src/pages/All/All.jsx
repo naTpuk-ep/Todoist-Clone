@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
 import './All.scss';
 
 import TodoList from '../../components/TodoList';
-import { todosDB } from '../../persistance/network';
-import { createTodo } from '../../redux/actions/actions';
-import { connect } from 'react-redux';
 
 function All(props) {
-
-  console.log('all');
-
-  const { todos, groupProps, createTodo } = props;
+  const { todos, groupProps } = props;
 
   return (
     <div className='All'>
@@ -19,8 +14,4 @@ function All(props) {
   );
 }
 
-const mapDispatchToProps = {
-  createTodo,
-};
-
-export default connect(null, mapDispatchToProps)(All);
+export default All;

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import './Upcoming.scss';
+
 import TodoList from '../../components/TodoList';
 
 function Upcoming(props) {

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   authorizate,
@@ -11,6 +11,7 @@ import {
 } from '../../redux/actions/actions';
 
 import './App.scss';
+
 import Header from '../Header';
 import Nav from '../Nav';
 import Main from '../../pages/Main';
@@ -26,7 +27,6 @@ require('dotenv').config();
 export const { REACT_APP_BASE_URL } = process.env;
 
 function App(props) {
-
   const {
     todos,
     createTodo,
@@ -37,7 +37,7 @@ function App(props) {
     showNav,
     closeNav,
     authState,
-    authorizate
+    authorizate,
   } = props;
 
   const groupProps = {
@@ -45,16 +45,15 @@ function App(props) {
     enter: true,
     exit: true,
   };
-
   const testAuth = async () => {
     const res = await auth.test();
     if (res.statusCode === 200) {
       authorizate(true);
     } else {
-			console.log('Authorizate to continue');
+      console.log('Authorizate to continue');
       authorizate(false);
     }
-  }
+  };
 
   testAuth();
 
@@ -71,10 +70,6 @@ function App(props) {
     getTodos();
   }, [createTodo]);
 
-  if (authState === null) {
-    return <h2>LOADING</h2>
-  }
-
   const getToday = () => {
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -83,48 +78,48 @@ function App(props) {
     return (today = `${yyyy}-${mm}-${dd}`);
   };
 
+  if (authState === null) {
+    return <h2>LOADING</h2>;
+  }
+
   if (authState) {
     return (
       <React.Fragment>
-      <BrowserRouter>
-        <div className='App'>
-          <Header showNav={showNav} showModal={showModal} />
-          <Nav navClassName={navClassName} closeNav={closeNav} />
-          <Modal
-            modalClassName={modalClassName}
-            closeModal={closeModal}
-            getToday={getToday}
-          />
-          <Switch>
-            <Route exact path='/'>
-              <Main />
-            </Route>
-            <Route path='/all'>
-              <All todos={todos} groupProps={groupProps} />
-            </Route>
-            <Route path='/today'>
-              <Today todos={todos} getToday={getToday} />
-            </Route>
-            <Route path='/upcoming'>
-              <Upcoming todos={todos} getToday={getToday} />
-            </Route>
-            <Route path='/login'>
-              <Login authState={authState} />
-            </Route>
-          </Switch>
-        </div>
-      </BrowserRouter>
-      <div className='overlay'></div>
-    </React.Fragment>
+        <BrowserRouter>
+          <div className='App'>
+            <Header showNav={showNav} showModal={showModal} />
+            <Nav navClassName={navClassName} closeNav={closeNav} />
+            <Modal
+              modalClassName={modalClassName}
+              closeModal={closeModal}
+              getToday={getToday}
+            />
+            <Switch>
+              <Route exact path='/'>
+                <Main />
+              </Route>
+              <Route path='/all'>
+                <All todos={todos} groupProps={groupProps} />
+              </Route>
+              <Route path='/today'>
+                <Today todos={todos} getToday={getToday} />
+              </Route>
+              <Route path='/upcoming'>
+                <Upcoming todos={todos} getToday={getToday} />
+              </Route>
+              <Route path='/login'>
+                <Login authState={authState} />
+              </Route>
+            </Switch>
+          </div>
+        </BrowserRouter>
+        <div className='overlay'></div>
+      </React.Fragment>
     );
   }
-  
-  return <Login />
+
+  return <Login />;
 }
-
-
-
-
 
 const mapStateToProps = (state) => {
   return {

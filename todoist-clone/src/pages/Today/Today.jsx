@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Today.scss';
+
 import TodoList from '../../components/TodoList';
 
 function Today(props) {

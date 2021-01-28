@@ -2,19 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { auth } from '../../persistance/network';
-
-import {authorizate} from '../../redux/actions/actions';
+import { authorizate } from '../../redux/actions/actions';
 
 import './Nav.scss';
 
 function Nav(props) {
   const { navClassName, closeNav, authorizate } = props;
 
-  
-	const logoutHandler = () => {
-		auth.setToken(undefined);
-		authorizate(false);
-	}
+  const logoutHandler = () => {
+    auth.setToken(undefined);
+    authorizate(false);
+  };
 
   return (
     <div className={navClassName}>
@@ -44,9 +42,8 @@ function Nav(props) {
   );
 }
 
-
 const mapDispatchToProps = {
-	authorizate
+  authorizate,
 };
 
 export default connect(null, mapDispatchToProps)(Nav);
