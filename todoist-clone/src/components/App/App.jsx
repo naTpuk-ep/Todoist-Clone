@@ -19,14 +19,14 @@ import Today from '../../pages/Today';
 import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
 import Login from '../Login';
-import Register from '../Register';
-import { auth, todosData } from '../../persistance/network';
+import { auth, todosDB } from '../../persistance/network';
 
 require('dotenv').config();
 
 export const { REACT_APP_BASE_URL } = process.env;
 
 function App(props) {
+
   const {
     todos,
     createTodo,
@@ -48,13 +48,32 @@ function App(props) {
 
   const testAuth = async () => {
     const res = await auth.test();
-    console.log('test');
     if (res.statusCode === 200) {
       authorizate(true);
+    } else {
+			console.log('Authorizate to continue');
+      authorizate(false);
     }
   }
 
   testAuth();
+
+  useEffect(() => {
+    const getTodos = async () => {
+      try {
+        const res = await todosDB.get();
+        const prevTodos = res || [];
+        prevTodos.forEach((el) => createTodo(el));
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+    getTodos();
+  }, [createTodo]);
+
+  if (authState === null) {
+    return <h2>LOADING</h2>
+  }
 
   if (authState) {
     return (
@@ -67,7 +86,6 @@ function App(props) {
             modalClassName={modalClassName}
             closeModal={closeModal}
           />
-          <Redirect to="/" />
           <Switch>
             <Route exact path='/'>
               <Main />
@@ -82,7 +100,7 @@ function App(props) {
               <Upcoming />
             </Route>
             <Route path='/login'>
-              <Login />
+              <Login authState={authState} />
             </Route>
           </Switch>
         </div>
@@ -90,9 +108,9 @@ function App(props) {
       <div className='overlay'></div>
     </React.Fragment>
     );
-  } else {
-    return <Login />
   }
+  
+  return <Login />
 }
 
 
