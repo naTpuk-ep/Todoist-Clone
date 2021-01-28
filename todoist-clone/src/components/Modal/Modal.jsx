@@ -6,27 +6,43 @@ import { createTodo } from '../../redux/actions/actions';
 import './Modal.scss';
 
 function Modal(props) {
-  const { createTodo, modalClassName } = props;
+  const { createTodo, modalClassName, getToday } = props;
 
   const [title, setTitle] = useState('');
+  const [date, setDate] = useState();
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    const defaultDate = [...event.target.childNodes].find(
+      (el) => el.id === 'date',
+    ).defaultValue;
+
     if (title.length) {
       const newTodo = {
         id: new Date().getTime(),
         title,
+        date: date || defaultDate,
         completed: false,
       };
       await todosData.create(newTodo);
       createTodo(newTodo);
       setTitle('');
+      setDate();
       props.closeModal();
     }
+
+    [...event.target.childNodes].find(
+      (el) => el.id === 'date',
+    ).value = defaultDate;
   };
 
-  const changeInputHandler = (event) => {
+  const changeInputTitleHandler = (event) => {
     setTitle(event.target.value);
+  };
+
+  const changeInputDateHandler = (event) => {
+    event.preventDefault();
+    setDate(event.target.value);
   };
 
   return (
@@ -38,7 +54,13 @@ function Modal(props) {
           id='title'
           value={title}
           name='title'
-          onChange={changeInputHandler}
+          onChange={changeInputTitleHandler}
+        />
+        <input
+          id='date'
+          type='date'
+          defaultValue={getToday()}
+          onChange={changeInputDateHandler}
         />
         <button type='submit'>
           <i className='material-icons red-text'>done</i>

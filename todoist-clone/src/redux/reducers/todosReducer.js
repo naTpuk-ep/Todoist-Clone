@@ -5,9 +5,14 @@ const initialState = {
 const todosReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_TODO':
+      console.log(action.payload);
       return {
         ...state,
-        todos: state.todos.concat([action.payload]),
+        todos: state.todos.concat([action.payload]).sort((a, b) => {
+          let dateA = new Date(a.date),
+            dateB = new Date(b.date);
+          return dateA - dateB;
+        }),
       };
 
     case 'COMPLETE_TODO':

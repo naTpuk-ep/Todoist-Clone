@@ -57,6 +57,14 @@ function App(props) {
     exit: true,
   };
 
+  const getToday = () => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+    return (today = `${yyyy}-${mm}-${dd}`);
+  };
+
   return (
     <React.Fragment>
       <BrowserRouter>
@@ -66,6 +74,7 @@ function App(props) {
           <Modal
             modalClassName={modalClassName}
             closeModal={closeModal}
+            getToday={getToday}
           />
           <Switch>
             <Route exact path='/'>
@@ -75,10 +84,10 @@ function App(props) {
               <All todos={todos} groupProps={groupProps} />
             </Route>
             <Route path='/today'>
-              <Today />
+              <Today todos={todos} getToday={getToday} />
             </Route>
             <Route path='/upcoming'>
-              <Upcoming />
+              <Upcoming todos={todos} getToday={getToday} />
             </Route>
             <Route path='/login'>
               <Login />
