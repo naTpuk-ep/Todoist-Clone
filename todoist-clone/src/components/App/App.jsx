@@ -37,24 +37,26 @@ function App(props) {
     showNav,
     closeNav,
     authState,
-    authorizate,
+    authorizate
   } = props;
 
-  console.log(authState);
+  const groupProps = {
+    appear: true,
+    enter: true,
+    exit: true,
+  };
 
-  const groupProps = useMemo(() => {
-    return {
-      appear: true,
-      enter: true,
-      exit: true,
-    };
-  }, []);
+  const testAuth = async () => {
+    const res = await auth.test();
+    console.log('test');
+    if (res.statusCode === 200) {
+      authorizate(true);
+    }
+  }
 
-  const startLogin = useMemo (() => (
-    <Login />
-  ), []);
+  testAuth();
 
-  const TheApp = useMemo(() => {
+  if (authState) {
     return (
       <React.Fragment>
       <BrowserRouter>
@@ -65,6 +67,7 @@ function App(props) {
             modalClassName={modalClassName}
             closeModal={closeModal}
           />
+          <Redirect to="/" />
           <Switch>
             <Route exact path='/'>
               <Main />
@@ -81,44 +84,16 @@ function App(props) {
             <Route path='/login'>
               <Login />
             </Route>
-            <Route path='/register'>
-              <Register />
-            </Route>
           </Switch>
         </div>
       </BrowserRouter>
       <div className='overlay'></div>
     </React.Fragment>
-    )
-  }, [closeModal, closeNav, groupProps, modalClassName, navClassName, showModal, showNav, todos]) 
-
-  useEffect(() => {
-    (async () => {
-      const data = await auth.test();
-      if (data.statusCode === 200) {
-        setStart(TheApp)
-      } else {
-        setStart(startLogin)
-      }
-    })()
-  }, [TheApp, startLogin]);
-  
-
-  useEffect(() => {
-    console.log('auth');
-  }, [authorizate]);
-
-  const [start, setStart] = useState(null);
-
-
-  if (start === null) {
-    return <h1>Load</h1>;
+    );
+  } else {
+    return <Login />
   }
-
-  return start;
 }
-
-
 
 
 
@@ -127,6 +102,7 @@ function App(props) {
 const mapStateToProps = (state) => {
   return {
     todos: state.todos.todos,
+    authState: state.authState.authState,
     modalClassName:
       state.domElementsClassNames.domElementsClassNames.modal,
     navClassName:
@@ -140,6 +116,7 @@ const mapDispatchToProps = {
   closeModal,
   showNav,
   closeNav,
+  authorizate,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

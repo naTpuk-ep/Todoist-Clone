@@ -1,5 +1,5 @@
 const initialState = {
-  auhtState: false,
+  authState: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -7,7 +7,7 @@ const authReducer = (state = initialState, action) => {
     case 'AUTH':
       return {
         ...state,
-        auhtState: state.auhtState,
+        authState: action.payload,
 			};
 
 		default: 

@@ -1,16 +1,21 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { auth } from '../../persistance/network';
-import {authorizate} from '../../redux/actions/actions';
 import { REACT_APP_BASE_URL } from '../App/App';
+import {authorizate} from '../../redux/actions/actions';
 
 import './Login.scss';
 
 function Login (props) {
 
-	const {authorizate} = props;
+	const	{authorizate} = props;
 	
+	// const [loginData, setLoginData] = useState({
+	// 	username: '',
+	// 	password: '',
+	// })
+
 	const loginData = {
 		username: '',
 		password: '',
@@ -46,10 +51,10 @@ function Login (props) {
 	}
 
 	const registerHandler = async () => {
-		console.log('register');
-
 		const auth = await axios.post(`${REACT_APP_BASE_URL}/auth/register`, loginData);
-		console.log(auth.data);
+		if (auth.data.statusCode === 200) {
+			loginHandler();
+		}
 	}
 
 
@@ -66,8 +71,9 @@ function Login (props) {
 	)
 }
 
+
 const mapDispatchToProps = {
-  authorizate
+	authorizate
 };
 
 export default connect(null, mapDispatchToProps)(Login);

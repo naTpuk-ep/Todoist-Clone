@@ -6,5 +6,5 @@ import authReducer from './authReducer';
 export const rootReducer = combineReducers({
   todos: todosReducer,
   domElementsClassNames: domElementsReducer,
-  authorizate: authReducer,
+  authState: authReducer,
 });
