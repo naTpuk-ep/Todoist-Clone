@@ -1,7 +1,9 @@
+import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import { auth } from '../../persistance/network';
 import {authorizate} from '../../redux/actions/actions';
+import { REACT_APP_BASE_URL } from '../App/App';
 
 import './Login.scss';
 
@@ -43,6 +45,13 @@ function Login (props) {
 		console.log(testData.result);
 	}
 
+	const registerHandler = async () => {
+		console.log('register');
+
+		const auth = await axios.post(`${REACT_APP_BASE_URL}/auth/register`, loginData);
+		console.log(auth.data);
+	}
+
 
 	return (
 		<div className='login'>
@@ -52,6 +61,7 @@ function Login (props) {
 			<button onClick={loginHandler}>Login</button>
 			<button onClick={testHandler}>Test</button>
 			<button onClick={logoutHandler}>Logout</button>
+			<button onClick={registerHandler}>Register</button>
 		</div>
 	)
 }
