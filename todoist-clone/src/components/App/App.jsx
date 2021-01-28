@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
+  authorizate,
   createTodo,
   showModal,
   closeModal,
@@ -19,11 +20,11 @@ import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
 import Login from '../Login';
 import Register from '../Register';
-import { todosData } from '../../persistance/network';
+import { auth, todosData } from '../../persistance/network';
 
 require('dotenv').config();
 
-export const { REACT_APP_USER_ID, REACT_APP_BASE_URL } = process.env;
+export const { REACT_APP_BASE_URL } = process.env;
 
 function App(props) {
   const {
@@ -35,30 +36,27 @@ function App(props) {
     closeModal,
     showNav,
     closeNav,
+    authState,
+    authorizate,
   } = props;
 
-  useEffect(() => {
-    const getDB = async () => {
-      try {
-        const res = await todosData.get();
-        console.log('todos', res);
-        const prevTodos = res || [];
-        prevTodos.forEach((el) => createTodo(el));
-      } catch (e) {
-        console.log(e.message);
-      }
+  console.log(authState);
+
+  const groupProps = useMemo(() => {
+    return {
+      appear: true,
+      enter: true,
+      exit: true,
     };
-    getDB();
-  }, [createTodo]);
+  }, []);
 
-  const groupProps = {
-    appear: true,
-    enter: true,
-    exit: true,
-  };
+  const startLogin = useMemo (() => (
+    <Login />
+  ), []);
 
-  return (
-    <React.Fragment>
+  const TheApp = useMemo(() => {
+    return (
+      <React.Fragment>
       <BrowserRouter>
         <div className='App'>
           <Header showNav={showNav} showModal={showModal} />
@@ -91,8 +89,40 @@ function App(props) {
       </BrowserRouter>
       <div className='overlay'></div>
     </React.Fragment>
-  );
+    )
+  }, [closeModal, closeNav, groupProps, modalClassName, navClassName, showModal, showNav, todos]) 
+
+  useEffect(() => {
+    (async () => {
+      const data = await auth.test();
+      if (data.statusCode === 200) {
+        setStart(TheApp)
+      } else {
+        setStart(startLogin)
+      }
+    })()
+  }, [TheApp, startLogin]);
+  
+
+  useEffect(() => {
+    console.log('auth');
+  }, [authorizate]);
+
+  const [start, setStart] = useState(null);
+
+
+  if (start === null) {
+    return <h1>Load</h1>;
+  }
+
+  return start;
 }
+
+
+
+
+
+
 
 const mapStateToProps = (state) => {
   return {

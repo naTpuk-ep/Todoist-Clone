@@ -68,14 +68,12 @@ export const todosData = {
 
 	async get () {
 		const headers = auth.getAuthHeaders();
-		console.log('headers', headers);
 		const response = await axios({
 			baseURL,
 			url: '/todoist',
 			headers,
 		});
-
-		return response.data;
+		return response.data.statusCode ? undefined : response.data;
 	},
 
 	async create (data) {
@@ -94,7 +92,7 @@ export const todosData = {
 
 	async save (data) {
 		const headers = auth.getAuthHeaders();
-
+		
 		const response = await axios({
 			baseURL,
 			method: 'put',

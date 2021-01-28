@@ -22,6 +22,8 @@ function Modal(props) {
       createTodo(newTodo);
       setTitle('');
       props.closeModal();
+    } else {
+      props.closeModal();
     }
   };
 

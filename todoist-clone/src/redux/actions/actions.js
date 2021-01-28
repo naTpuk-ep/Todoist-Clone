@@ -42,3 +42,10 @@ export function closeNav() {
     type: 'CLOSE_NAV',
   };
 }
+
+export function authorizate(authState) {
+  return {
+    type: 'AUTH',
+    payload: authState,
+  }
+}
