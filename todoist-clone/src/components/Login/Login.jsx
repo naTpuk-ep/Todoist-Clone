@@ -1,9 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { auth } from '../../persistance/network';
+import {authorizate} from '../../redux/actions/actions';
 
 import './Login.scss';
 
-function Login () {
+function Login (props) {
+
+	const {authorizate} = props;
 	
 	const loginData = {
 		username: '',
@@ -16,20 +20,25 @@ function Login () {
 
 	const loginHandler = async () => {
 		console.log('login');
-
 		const res = await auth.login(loginData);
-		if (res.statusCode !== 200) {
+		if (res.statusCode === 200) {
+			authorizate(true);
+		} else {
 			console.log(res.reason);
 		}
+	}
+
+	const logoutHandler = () => {
+		auth.setToken(undefined);
+		authorizate(false);
 	}
 
 	const changeHandler = (e) => {
 		loginData[e.target.name] = e.target.value;
 	}
 
-	const testHandler = async () => {
+		const testHandler = async () => {
 		const result = await auth.test();
-
 		testData.result = result.statusCode === 200 ? 'ok' : 'fail';
 		console.log(testData.result);
 	}
@@ -42,8 +51,13 @@ function Login () {
 			{/* <input type='submit' value='Login' onClick={loginHandler}/> */}
 			<button onClick={loginHandler}>Login</button>
 			<button onClick={testHandler}>Test</button>
+			<button onClick={logoutHandler}>Logout</button>
 		</div>
 	)
 }
 
-export default Login;
+const mapDispatchToProps = {
+  authorizate
+};
+
+export default connect(null, mapDispatchToProps)(Login);
