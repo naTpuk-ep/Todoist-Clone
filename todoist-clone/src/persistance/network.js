@@ -52,19 +52,17 @@ export const auth = {
 
 	async test () {
 		const headers = auth.getAuthHeaders();
-
 		const response = await axios({
 			baseURL,
 			method: 'post',
 			url: '/auth/test',
 			headers,
 		});
-
 		return response.data;
 	},
 };
 
-export const todosData = {
+export const todosDB = {
 
 	async get () {
 		const headers = auth.getAuthHeaders();

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { todosData } from '../../persistance/network';
+import { todosDB } from '../../persistance/network';
 import {
   completeTodo,
   removeTodo,
@@ -11,7 +11,7 @@ function TodoItem(props) {
   const { todo, removeTodo, completeTodo } = props;
 
   useEffect(() => {
-    todosData.save(todo)
+    todosDB.save(todo)
   }, [todo]);
 
   const completeHandler = async (e) => {
@@ -20,7 +20,7 @@ function TodoItem(props) {
 
   const removeHandler = async () => {
     removeTodo(todo);
-    await todosData.remove(todo);
+    await todosDB.remove(todo);
   }
 
   let titleClassName = 'title';

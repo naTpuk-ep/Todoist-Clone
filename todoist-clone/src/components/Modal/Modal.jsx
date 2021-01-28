@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { todosData } from '../../persistance/network';
+import { todosDB } from '../../persistance/network';
 import { createTodo } from '../../redux/actions/actions';
 
 import './Modal.scss';
@@ -18,7 +18,7 @@ function Modal(props) {
         title,
         completed: false,
       };
-      await todosData.create(newTodo);
+      await todosDB.create(newTodo);
       createTodo(newTodo);
       setTitle('');
       props.closeModal();
