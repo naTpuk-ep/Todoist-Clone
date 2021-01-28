@@ -37,6 +37,7 @@ function TodoItem(props) {
           onChange={completeHandler}
         />
         <span className={titleClassName}>{todo.title}</span>
+        <span>{todo.date}</span>
       </label>
       <i
         onClick={removeHandler}
