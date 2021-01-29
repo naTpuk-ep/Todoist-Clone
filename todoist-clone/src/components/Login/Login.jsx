@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { auth } from '../../persistance/network';
 import { REACT_APP_BASE_URL } from '../App/App';
@@ -11,37 +11,42 @@ import './Login.scss';
 function Login(props) {
   const { authorizate, authState } = props;
 
-  // const [loginData, setLoginData] = useState({
-  // 	username: '',
-  // 	password: '',
-  // })
-
-  const loginData = {
+  const [loginData, setloginData] = useState({
     username: '',
     password: '',
-  };
+  });
 
-  const testData = {
-    result: '',
-  };
+  const [reason, setReason] = useState('');
 
   const loginHandler = async () => {
     const res = await auth.login(loginData);
     if (res.statusCode === 200) {
       authorizate(true);
     } else {
-      console.log(res.reason);
+      setReason(res.reason);
+      setloginData({
+        username: '',
+        password: '',
+    });
     }
   };
 
   const changeHandler = (e) => {
-    loginData[e.target.name] = e.target.value;
+    setReason('');
+    const { name, value } = e.target;
+    setloginData(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
   };
-
+  
+  const testData = {
+    result: '',
+  };
   const testHandler = async () => {
     const result = await auth.test();
     testData.result = result.statusCode === 200 ? 'ok' : 'fail';
-    console.log(testData.result);
+    setReason(result);
   };
 
   const registerHandler = async () => {
@@ -52,7 +57,7 @@ function Login(props) {
     if (auth.data.statusCode === 200) {
       loginHandler();
     } else {
-      console.log(auth.data.reason);
+      setReason(auth.data.reason);
     }
   };
 
@@ -61,12 +66,14 @@ function Login(props) {
   ) : (
     <div className='login'>
       <input
+        value={loginData.username}
         type='text'
         name='username'
         placeholder='User name'
         onChange={changeHandler}
       />
       <input
+      value={loginData.password}
         type='text'
         name='password'
         placeholder='Password'
@@ -75,6 +82,7 @@ function Login(props) {
       <button onClick={loginHandler}>Login</button>
       <button onClick={testHandler}>Test</button>
       <button onClick={registerHandler}>Register</button>
+      {reason ? <span className='reason'>{reason}</span> : null}
     </div>
   );
 }
