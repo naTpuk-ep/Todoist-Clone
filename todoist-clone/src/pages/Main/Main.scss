@@ -1,0 +1,38 @@
+#temp {
+	margin: 0 auto;
+}
+
+.weather {
+	display: flex;
+  flex-direction: column;
+  width: 300px;
+  align-items: center;
+  justify-content: center;
+	margin: 0 auto;
+	input {
+		text-align: center;
+		font-size: 50px;
+		margin-top: 20px;
+		border: none
+	}
+	h5 {
+		margin: 0;
+	}
+}
+
+.news {
+	&__item {
+		display: flex;
+		margin: 10px 20px;
+		img {
+			margin-right: 30px;
+		}
+		&__article {
+			text-align: left;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			margin: 20px 0;
+		}
+	}
+}
