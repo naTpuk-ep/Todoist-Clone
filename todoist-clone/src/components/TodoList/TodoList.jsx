@@ -4,7 +4,7 @@ import TodoItem from '../TodoItem';
 function TodoList(props) {
   const { todos } = props;
 
-  if (!todos.length) {
+  if (!todos || !todos.length) {
     return (
       <div className='TodoList'>
         <p>Todos not yet</p>

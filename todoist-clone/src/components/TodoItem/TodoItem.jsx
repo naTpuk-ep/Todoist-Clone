@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { todosDB } from '../../persistance/network';
 import {
@@ -11,17 +11,19 @@ import './TodoItem.scss';
 function TodoItem(props) {
   const { todo, removeTodo, completeTodo } = props;
 
-  useEffect(() => {
-    todosDB.save(todo);
-  }, [todo]);
+  const [currTodo, setCurrTodo] = useState(todo);
 
-  const completeHandler = async (e) => {
+  if (currTodo !== todo) {
+    todosDB.save(todo);
+    setCurrTodo(todo);
+  }
+
+  const completeHandler = (e) => {
     completeTodo(todo);
   };
 
-  const removeHandler = async () => {
+  const removeHandler = () => {
     removeTodo(todo);
-    await todosDB.remove(todo);
   };
 
   let titleClassName = 'title';
