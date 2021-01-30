@@ -8,6 +8,7 @@ import {
   closeModal,
   showNav,
   closeNav,
+  getTodos,
 } from '../../redux/actions/actions';
 
 import './App.scss';
@@ -20,7 +21,7 @@ import Today from '../../pages/Today';
 import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
 import Login from '../Login';
-import { auth, todosDB } from '../../persistance/network';
+import { auth } from '../../persistance/network';
 
 require('dotenv').config();
 
@@ -29,7 +30,7 @@ export const { REACT_APP_BASE_URL } = process.env;
 function App(props) {
   const {
     todos,
-    createTodo,
+    getTodos,
     modalClassName,
     navClassName,
     showModal,
@@ -58,17 +59,9 @@ function App(props) {
   testAuth();
 
   useEffect(() => {
-    const getTodos = async () => {
-      try {
-        const res = await todosDB.get();
-        const prevTodos = res || [];
-        prevTodos.forEach((el) => createTodo(el));
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
     getTodos();
-  }, [createTodo]);
+  }, [getTodos, authState]);
+
 
   const getToday = () => {
     let today = new Date();
@@ -133,6 +126,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+  getTodos,
   createTodo,
   showModal,
   closeModal,

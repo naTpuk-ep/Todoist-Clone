@@ -40,14 +40,14 @@ function Login(props) {
     }));
   };
   
-  const testData = {
-    result: '',
-  };
-  const testHandler = async () => {
-    const result = await auth.test();
-    testData.result = result.statusCode === 200 ? 'ok' : 'fail';
-    setReason(result);
-  };
+  // const testData = {
+  //   result: '',
+  // };
+  // const testHandler = async () => {
+  //   const result = await auth.test();
+  //   testData.result = result.statusCode === 200 ? 'ok' : 'fail';
+  //   setReason(result);
+  // };
 
   const registerHandler = async () => {
     const auth = await axios.post(
@@ -80,7 +80,7 @@ function Login(props) {
         onChange={changeHandler}
       />
       <button onClick={loginHandler}>Login</button>
-      <button onClick={testHandler}>Test</button>
+      {/* <button onClick={testHandler}>Test</button> */}
       <button onClick={registerHandler}>Register</button>
       {reason ? <span className='reason'>{reason}</span> : null}
     </div>
