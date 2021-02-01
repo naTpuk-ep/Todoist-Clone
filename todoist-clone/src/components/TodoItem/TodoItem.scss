@@ -1,12 +1,11 @@
 .TodoItem {
-  margin-bottom: 10px;
-  margin: 10px auto;
-  width: 60%;
+  margin: 30px 0;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background: #f3f3f3;
   padding: 1rem;
+  color: silver;
+  border-bottom: 1px solid silver;
+  position: relative;
 
   label,
   i {
@@ -14,15 +13,26 @@
   }
 
   label {
-    input {
-      border-radius: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+
+    .todo-title {
+      padding: 0 55px;
+      height: auto;
     }
-    .title {
-      color: black;
-    }
-    .title.completed {
-      color: grey;
+    .todo-title.completed {
       text-decoration: line-through;
     }
+  }
+  .todo-date {
+    font-size: 0.8rem;
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+  }
+
+  i {
+    color: #e44332;
   }
 }

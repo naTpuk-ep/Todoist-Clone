@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createTodo } from '../../redux/actions/actions';
 
+import useSound from 'use-sound';
+import successSound from '../../assets/sounds/success_sound.mp3';
+
 import './Modal.scss';
 
 function Modal(props) {
@@ -10,13 +13,18 @@ function Modal(props) {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState();
 
+  const [playSuccess] = useSound(successSound, {
+    volume: 0.25,
+  });
+
   const submitHandler = async (event) => {
     event.preventDefault();
-    const defaultDate = [...event.target.childNodes].find(
-      (el) => el.id === 'date',
-    ).defaultValue;
 
     if (title.length) {
+      const defaultDate = [...event.target.childNodes].find(
+        (el) => el.id === 'date',
+      ).defaultValue;
+
       const newTodo = {
         id: new Date().getTime(),
         title,
@@ -27,13 +35,13 @@ function Modal(props) {
       setTitle('');
       setDate();
       props.closeModal();
-    } else {
-      props.closeModal();
-    }
 
-    [...event.target.childNodes].find(
-      (el) => el.id === 'date',
-    ).value = defaultDate;
+      [...event.target.childNodes].find(
+        (el) => el.id === 'date',
+      ).value = defaultDate;
+
+      playSuccess();
+    }
   };
 
   const changeInputTitleHandler = (event) => {
@@ -54,17 +62,21 @@ function Modal(props) {
           id='title'
           value={title}
           name='title'
+          className='title-input'
           onChange={changeInputTitleHandler}
         />
         <input
           id='date'
           type='date'
+          className='date-input'
           defaultValue={getToday()}
           onChange={changeInputDateHandler}
         />
-        <button type='submit'>
-          <i className='material-icons red-text'>done</i>
-        </button>
+        <div className='btns-block'>
+          <button type='submit'>
+            <i className='material-icons'>done</i>
+          </button>
+        </div>
       </form>
     </div>
   );
