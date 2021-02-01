@@ -1,5 +1,12 @@
 import { todosDB } from '../../persistance/network';
 
+export function setMonthView(monthView) {
+  return {
+    type: 'MONTH_VIEW',
+    payload: monthView,
+  }
+}
+
 export const getTodos = () => {
   return async dispatch => {
     const res = await todosDB.get();

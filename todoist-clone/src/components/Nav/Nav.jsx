@@ -27,15 +27,18 @@ function Nav(props) {
           <li>
             <Link to='/'>Main</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to='/all'>All</Link>
-          </li>
+          </li> */}
           <li>
             <Link to='/today'>Today</Link>
           </li>
           <li>
-            <Link to='/upcoming'>Upcoming</Link>
+            <Link to='/month'>Month</Link>
           </li>
+          {/* <li>
+            <Link to='/upcoming'>Upcoming</Link>
+          </li> */}
         </ul>
       </nav>
     </div>
