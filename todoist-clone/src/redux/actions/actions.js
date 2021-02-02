@@ -1,5 +1,19 @@
 import { todosDB } from '../../persistance/network';
 
+export function setMonthView(monthView) {
+  return {
+    type: 'MONTH_VIEW',
+    payload: monthView,
+  }
+}
+
+export function setWeekView(weekView) {
+  return {
+    type: 'WEEK_VIEW',
+    payload: weekView,
+  }
+}
+
 export const getTodos = () => {
   return async dispatch => {
     const res = await todosDB.get();
