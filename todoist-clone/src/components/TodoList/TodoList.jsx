@@ -10,13 +10,16 @@ import {
 import './TodoList.scss';
 
 function TodoList(props) {
-  const { todos } = props;
+  const { todos, getDayTodos } = props;
 
-  if (!todos || !todos.length) {
+  const todoData = todos ? todos : getDayTodos;
+
+  if (!todoData.length) {
     return (
       <div className='TodoList empty'>
         <img src={keepCalm} alt='calm' />
         <p>Enjoy your freetime</p>
+        <span>...</span>
       </div>
     );
   }
@@ -24,7 +27,7 @@ function TodoList(props) {
   return (
     <div className='TodoList'>
       <TransitionGroup>
-        {todos.map((el, index) => (
+        {todoData.map((el, index) => (
           <CSSTransition key={index} timeout={300} classNames='item'>
             <TodoItem todo={el} />
           </CSSTransition>

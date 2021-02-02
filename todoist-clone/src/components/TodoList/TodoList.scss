@@ -4,13 +4,17 @@
 }
 .TodoList.empty {
   img {
-    width: 400px;
+    width: 300px;
     height: auto;
-    margin-bottom: 0;
+    margin: 50px 0 0;
   }
   p {
     font-size: 2.5rem;
     font-style: italic;
+  }
+  span {
+    font-size: 2.5rem;
+    color: silver;
   }
 }
 
