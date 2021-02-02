@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TodoList from '../TodoList';
 import { setWeekView } from '../../redux/actions/actions';
 import './Week.scss';
@@ -12,10 +12,10 @@ function Week (props) {
 	const dispatch = useDispatch();
 	const currDate = useSelector(state => state.view.weekDate);
 
-	const [tableDate, setTableDate] = useState({
+	const tableDate = {
 		year: new Date().getFullYear(),
 		month: new Date().getMonth(),
-	})
+	}
 
 	const checkDates = (date1, date2) => (
 		date1.getTime() === date2.getTime()
