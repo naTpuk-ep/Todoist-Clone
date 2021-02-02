@@ -22,11 +22,21 @@ function Nav(props) {
       <nav>
         <ul>
           <li>
-            <button onClick={logoutHandler}>Logout</button>
+            <button className='logout-btn' onClick={logoutHandler}>
+              Logout
+            </button>
           </li>
-          <li>
+          <li onClick={closeNav}>
             <Link to='/'>Main</Link>
           </li>
+<!--           <li onClick={closeNav}>
+            <Link to='/all'>All</Link>
+          </li>
+          <li onClick={closeNav}>
+            <Link to='/today'>Today</Link>
+          </li>
+          <li onClick={closeNav}>
+            <Link to='/upcoming'>Upcoming</Link> -->
           {/* <li>
             <Link to='/all'>All</Link>
           </li> */}

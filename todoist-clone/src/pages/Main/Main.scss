@@ -1,38 +1,82 @@
-#temp {
-	margin: 0 auto;
-}
+.Main {
+  .weather-block {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 
-.weather {
-	display: flex;
-  flex-direction: column;
-  width: 300px;
-  align-items: center;
-  justify-content: center;
-	margin: 0 auto;
-	input {
-		text-align: center;
-		font-size: 50px;
-		margin-top: 20px;
-		border: none
-	}
-	h5 {
-		margin: 0;
-	}
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > div {
+      padding: 0.5rem;
+      text-align: center;
+      width: 120px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      * {
+        margin: 0;
+        font-size: 1.5rem;
+        text-align: center;
+        color: white;
+      }
+    }
+  }
 
-.news {
-	&__item {
-		display: flex;
-		margin: 10px 20px;
-		img {
-			margin-right: 30px;
-		}
-		&__article {
-			text-align: left;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			margin: 20px 0;
-		}
-	}
+  .random-activity-generator {
+    margin: 0 auto;
+    width: 80%;
+    h2 {
+      font-size: 4rem;
+      color: white;
+      margin: 50px 0 70px;
+      font-style: italic;
+      font-weight: 200;
+    }
+    .random-todo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      background: white;
+      border-radius: 20px;
+      button {
+        border: none;
+        background-color: #e44332;
+        color: white;
+      }
+      > button {
+        width: 100%;
+        padding: 20px 0;
+        border-radius: 20px;
+      }
+      .refresh-random-todo {
+        border-radius: 20px 20px 0 0;
+      }
+      h3 {
+        flex-basis: 70%;
+        font-style: italic;
+        padding: 10px;
+      }
+      .random-todo-data {
+        flex-basis: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p {
+          padding-bottom: 5px;
+          border-bottom: 2px solid black;
+        }
+        button {
+          margin-bottom: 20px;
+          border-radius: 10px;
+          padding: 10px;
+          transition: 0.5s;
+        }
+        button:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
 }

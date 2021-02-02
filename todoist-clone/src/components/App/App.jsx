@@ -35,6 +35,7 @@ function App(props) {
     getTodos,
     modalClassName,
     navClassName,
+    overlayClassName,
     showModal,
     closeModal,
     showNav,
@@ -43,11 +44,6 @@ function App(props) {
     authorizate,
   } = props;
 
-  const groupProps = {
-    appear: true,
-    enter: true,
-    exit: true,
-  };
   const testAuth = async () => {
     const res = await auth.test();
     if (res.statusCode === 200) {
@@ -63,7 +59,6 @@ function App(props) {
   useEffect(() => {
     getTodos();
   }, [getTodos, authState]);
-
 
   const getToday = () => {
     let today = new Date();
@@ -100,10 +95,10 @@ function App(props) {
             />
             <Switch>
               <Route exact path='/'>
-                <Main />
+                <Main getToday={getToday} />
               </Route>
               <Route path='/all'>
-                <All todos={todos} groupProps={groupProps} />
+                <All todos={todos} />
               </Route>
               <Route path='/today'>
                 <Today todos={todos} getToday={getToday} />
@@ -123,7 +118,13 @@ function App(props) {
             </Switch>
           </div>
         </BrowserRouter>
-        <div className='overlay'></div>
+        <div
+          className={overlayClassName}
+          onClick={() => {
+            closeModal();
+            closeNav();
+          }}
+        ></div>
       </React.Fragment>
     );
   }
@@ -139,6 +140,8 @@ const mapStateToProps = (state) => {
       state.domElementsClassNames.domElementsClassNames.modal,
     navClassName:
       state.domElementsClassNames.domElementsClassNames.nav,
+    overlayClassName:
+      state.domElementsClassNames.domElementsClassNames.overlay,
   };
 };
 

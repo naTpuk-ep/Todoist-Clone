@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { createTodo } from '../../redux/actions/actions';
+
+import useSound from 'use-sound';
+import successSound from '../../assets/sounds/success_sound.mp3';
 
 import './Main.scss';
 
-function Main() {
+function Main(props) {
+  const { createTodo, getToday } = props;
 
   const [city, setCity] = useState('Minsk');
   const [error, setError] = useState('');
@@ -12,22 +18,27 @@ function Main() {
     icon: '',
     desc: '',
   });
-  const [nData, setNData] = useState([{
+
+  const [randomTodo, setRandomTodo] = useState({
     title: '',
-    url: '',
-    img: '',
-    date: '',
-  }])
+    participants: '',
+    price: '',
+    type: '',
+    link: '',
+  });
 
-  const { REACT_APP_WEATHER_API_KEY, REACT_APP_NEWS_API_KEY } = process.env;
+  const [playSuccess] = useSound(successSound, {
+    volume: 0.25,
+  });
+
+  const { REACT_APP_WEATHER_API_KEY } = process.env;
   const weatherAPI = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=en&appid=${REACT_APP_WEATHER_API_KEY}&units=metric`;
-  const newsAPI = `http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${REACT_APP_NEWS_API_KEY}`;
+  const randomTodoAPI = 'https://www.boredapi.com/api/activity';
 
-  
   const cityHandler = (e) => {
     setCity(e.target.value);
-  }
-  
+  };
+
   useEffect(() => {
     const getWeather = async () => {
       try {
@@ -42,69 +53,82 @@ function Main() {
       } catch (e) {
         setError('Enter correct city');
       }
-    }
-    getWeather();
-
-  }, [weatherAPI]);
-  
-  useEffect(() => {
-
-    const getNews = async () => {
-      try {
-        const res = await axios.get(newsAPI);
-        const data = [];
-        res.data.articles.forEach(article => {
-          data.push({
-            title: article.title,
-            url: article.url,
-            img: article.urlToImage,
-            date: `${new Date(article.publishedAt).getDate()}.${new Date(article.publishedAt).getMonth() + 1}.${new Date(article.publishedAt).getFullYear()}`,
-          })
-        })        
-        setNData(data);
-      } catch (e) {
-        console.log(e.message);
-      }
     };
-    getNews();
+    getWeather();
+  }, [weatherAPI]);
 
-  }, [newsAPI]);
+  const getRandomTodo = async () => {
+    try {
+      const result = await axios.get(randomTodoAPI);
+      setRandomTodo({
+        title: result.data.activity,
+        participants: result.data.participants,
+        price: result.data.price,
+        type: result.data.type,
+        link: result.data.link,
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  const submitRandomTodo = () => {
+    if (randomTodo.title !== '') {
+      const newTodo = {
+        id: new Date().getTime(),
+        title: randomTodo.title,
+        date: getToday(),
+        completed: false,
+      };
+      createTodo(newTodo);
+      getRandomTodo();
+      playSuccess();
+    }
+  };
 
   return (
-    <React.Fragment>
-      <div className='weather'>
-        <input 
-          className='city'
-          value={city}
-          onChange={cityHandler}
-        ></input>
-        <span>{error}</span>
-        <i  className={wData.icon}></i>
-        <h5 id='desc'>{wData.desc}</h5>
-        <h1 id='temp'>
-          {wData.temp}
-        </h1>
+    <div className='Main'>
+      <div className='weather-block'>
+        <div className='input-block'>
+          <input
+            id='city'
+            className='city'
+            value={city}
+            onChange={cityHandler}
+          ></input>
+        </div>
+        <div className='data-block'>
+          <h2 id='temp'>{wData.temp} °C</h2>
+          <i className={wData.icon}></i>
+        </div>
       </div>
-      <div className='news'>
-        <ul>
-          {nData.map((item, i) => (
-            <li key={i}>
-              <div className='news__item'>
-                <img height='200px' src={item.img} alt=""/>
-                <div className='news__item__article'>
-                  <p>{item.date}</p>
-                  <h5>
-                    {item.title}
-                  </h5>
-                  <a href={item.url}>{item.url}</a>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+
+      <div className='random-activity-generator'>
+        <h2>Random activity genarator</h2>
+        <div className='random-todo'>
+          <button
+            className='refresh-random-todo'
+            onClick={() => getRandomTodo()}
+          >
+            Give me an new activity
+          </button>
+          <h3>{randomTodo.title}</h3>
+          <div className='random-todo-data'>
+            <p>Participants: {randomTodo.participants}</p>
+            <p>Price: {randomTodo.price} $</p>
+            <p>Type: {randomTodo.type}</p>
+            <button onClick={submitRandomTodo}>
+              Add to my Todoist
+            </button>
+          </div>
+        </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 
-export default Main;
+const mapDispatchToProps = {
+  createTodo,
+};
+
+export default connect(null, mapDispatchToProps)(Main);

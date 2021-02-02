@@ -2,6 +2,7 @@ const initialState = {
   domElementsClassNames: {
     modal: 'Modal',
     nav: 'Nav',
+    overlay: 'Overlay',
   },
 };
 
@@ -14,6 +15,9 @@ const domElementsReducer = (state = initialState, action) => {
           ...state.domElementsClassNames,
           modal:
             initialState.domElementsClassNames.modal + ' Modal_show',
+          overlay:
+            initialState.domElementsClassNames.overlay +
+            ' Overlay_show',
         },
       };
 
@@ -23,6 +27,7 @@ const domElementsReducer = (state = initialState, action) => {
         domElementsClassNames: {
           ...state.domElementsClassNames,
           modal: initialState.domElementsClassNames.modal,
+          overlay: initialState.domElementsClassNames.overlay,
         },
       };
 
@@ -32,6 +37,9 @@ const domElementsReducer = (state = initialState, action) => {
         domElementsClassNames: {
           ...state.domElementsClassNames,
           nav: initialState.domElementsClassNames.nav + ' Nav_show',
+          overlay:
+            initialState.domElementsClassNames.overlay +
+            ' Overlay_show',
         },
       };
 
@@ -41,6 +49,7 @@ const domElementsReducer = (state = initialState, action) => {
         domElementsClassNames: {
           ...state.domElementsClassNames,
           nav: initialState.domElementsClassNames.nav,
+          overlay: initialState.domElementsClassNames.overlay,
         },
       };
 

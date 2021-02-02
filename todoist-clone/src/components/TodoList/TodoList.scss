@@ -1,0 +1,30 @@
+.TodoList {
+  width: 60%;
+  margin: 0 auto;
+}
+.TodoList.empty {
+  img {
+    width: 400px;
+    height: auto;
+    margin-bottom: 0;
+  }
+  p {
+    font-size: 2.5rem;
+    font-style: italic;
+  }
+}
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}

@@ -1,20 +1,54 @@
 .Modal {
-  background-color: #fff;
+  background-color: white;
   width: 50vw;
-  height: 20vh;
-
+  height: fit-content;
   position: fixed;
   margin: auto;
-
-  bottom: -20vh;
+  bottom: -50vh;
+  z-index: 2;
   left: 0;
   right: 0;
+  border-radius: 15px;
+  opacity: 0;
+  transition: all 0.8s;
+  form {
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    label {
+      font-size: 1.5rem;
+      flex-basis: 100%;
+      color: gray;
+      margin-bottom: 20px;
+    }
+    .title-input {
+      flex-basis: 100%;
+      color: gray;
+      margin-bottom: 20px;
+    }
+    .date-input {
+      color: gray;
+      flex-basis: 50%;
+    }
+    .btns-block {
+      flex-basis: 50%;
+      button {
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 10%;
+        background-color: #e44332;
+        i {
+          color: white;
+        }
+      }
+    }
+  }
 }
 
 .Modal_show {
   background-color: #fff;
   position: fixed;
-
   bottom: 50vh;
-  z-index: 1;
+  opacity: 1;
 }
