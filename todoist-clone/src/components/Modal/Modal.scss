@@ -38,6 +38,9 @@
         border: none;
         border-radius: 10%;
         background-color: #e44332;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         i {
           color: white;
         }
