@@ -22,6 +22,7 @@ import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
 import Login from '../Login';
 import { auth } from '../../persistance/network';
+import Month from '../../pages/Month';
 
 require('dotenv').config();
 
@@ -75,7 +76,7 @@ function App(props) {
     return <h2>LOADING</h2>;
   }
 
-  if (authState) {
+  if (authState && todos) {
     return (
       <React.Fragment>
         <BrowserRouter>
@@ -96,6 +97,9 @@ function App(props) {
               </Route>
               <Route path='/today'>
                 <Today todos={todos} getToday={getToday} />
+              </Route>
+              <Route>
+                <Month path='/month' todos={todos}/>
               </Route>
               <Route path='/upcoming'>
                 <Upcoming todos={todos} getToday={getToday} />
