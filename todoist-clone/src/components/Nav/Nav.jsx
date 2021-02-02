@@ -34,6 +34,9 @@ function Nav(props) {
             <Link to='/today'>Today</Link>
           </li>
           <li>
+            <Link to='/week'>Week</Link>
+          </li>
+          <li>
             <Link to='/month'>Month</Link>
           </li>
           {/* <li>

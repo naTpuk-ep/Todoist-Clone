@@ -23,6 +23,7 @@ import Modal from '../Modal';
 import Login from '../Login';
 import { auth } from '../../persistance/network';
 import Month from '../../pages/Month';
+import Week from '../Week';
 
 require('dotenv').config();
 
@@ -72,6 +73,15 @@ function App(props) {
     return (today = `${yyyy}-${mm}-${dd}`);
   };
 
+  const days = ['Monday', 'Tuesday', 'Wednsday', 'Thursday', 'Friday', 'Saterday', 'Sunday'];
+  
+	const getDay = (day) => {
+		return day.getDay() === 0 ? 7 : day.getDay();
+	}
+	const dayOfFirst = getDay(new Date(new Date(getToday()).getFullYear(), new Date(getToday()).getMonth(), 1));
+  
+  
+
   if (authState === null) {
     return <h2>LOADING</h2>;
   }
@@ -98,8 +108,11 @@ function App(props) {
               <Route path='/today'>
                 <Today todos={todos} getToday={getToday} />
               </Route>
-              <Route>
-                <Month path='/month' todos={todos}/>
+              <Route path='/week'>
+                <Week todos={todos} getToday={getToday} dayOfFirst={dayOfFirst} days={days} getDay={getDay}/>
+              </Route>
+              <Route path='/month' >
+                <Month todos={todos} getToday={getToday} dayOfFirst={dayOfFirst} days={days} getDay={getDay}/>
               </Route>
               <Route path='/upcoming'>
                 <Upcoming todos={todos} getToday={getToday} />

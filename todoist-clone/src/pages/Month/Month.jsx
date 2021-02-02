@@ -6,25 +6,20 @@ import './Month.scss';
 
 function Month( props ) {
 
-	const { todos } = props;
-	console.log(props);
-
-	const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+	const { todos, getToday, days, getDay } = props;
 
 	const [tableDate, setTableDate] = useState({
 		year: new Date().getFullYear(),
 		month: new Date().getMonth(),
 	})
 
-	const todosDates = todos.map(todo => todo.date);
+	// const todosDates = todos.map(todo => todo.date);
 	
 	const dispatch = useDispatch();
-	const currDate = useSelector(state => state.monthView.date);
+	const currDate = useSelector(state => state.view.monthDate);
+	console.log(currDate);
 
 	const dayOfFirst = getDay(new Date(tableDate.year, tableDate.month, 1));
-	function getDay (day) {
-		return day.getDay() === 0 ? 7 : day.getDay();
-	}
 
 	const daysInMonth = 32 - 
 	new Date(
@@ -34,18 +29,22 @@ function Month( props ) {
 	).getDate();
 
 	const getMonthsTodos = () => {
-		const todos = [];
+		const monthTodos = [];
 		for (let i = 0; i < daysInMonth; i++) {
-			todos[i] = 0;
-			todosDates.forEach(date => {
-				if (new Date(date).getFullYear() === tableDate.year 
-				&& new Date(date).getMonth() === tableDate.month
-				&& new Date(date).getDate() === i + 1) {
-					todos[i] += 1;
+			monthTodos[i] = {
+				numberOfTodos: 0,
+				todos: []
+			};
+			todos.forEach(todo => {
+				if (new Date(todo.date).getFullYear() === tableDate.year 
+				&& new Date(todo.date).getMonth() === tableDate.month
+				&& new Date(todo.date).getDate() === i + 1) {
+					monthTodos[i].numberOfTodos += 1;
+					monthTodos[i].todos.push(todo);
 				}
 			})
 		}
-		return todos;
+		return monthTodos;
 	}
 
 	const setDatesToTable = () => (
@@ -53,11 +52,18 @@ function Month( props ) {
 			i === dayOfFirst - 1
 				? getMonthsTodos().map((dayTodos, j) => (
 					<div key={j + i} className='date'>
-						<span className='date__number'>
+						<span className='number'>
 							{`${j + 1}:`}
 						</span>
-						<span className='date__todos'>
-							{Boolean(dayTodos) ? dayTodos : null}
+						<span className={`todos ${
+							dayTodos.todos.some(todo => (
+								!todo.completed
+								&& new Date(todo.date).getTime() < new Date(getToday()).getTime()
+							))
+							? 'past'
+							: ''
+						}`}>
+							{Boolean(dayTodos.numberOfTodos) ? dayTodos.numberOfTodos : null}
 						</span>
 					</div>
 				))
@@ -78,6 +84,7 @@ function Month( props ) {
 	)
 
 	const clickHandler = (e) => {
+		console.log('click');
 		const clickDate = {
 			year: tableDate.year,
 			month: tableDate.month,
@@ -133,12 +140,14 @@ function Month( props ) {
 
 	return (
 		<React.Fragment>
-			<h3>{`${currDate 
-			? currDate.date 
-			: ''} ${new Date(
-				tableDate.year, 
-				tableDate.month
-			).toLocaleString('default', { month: 'long' })} ${tableDate.year}`}</h3>
+			{/* <h3>
+				{`${currDate 
+				? currDate.date 
+				: ''} ${new Date(
+					tableDate.year, 
+					tableDate.month
+				).toLocaleString('default', { month: 'long' })} ${tableDate.year}`}
+			</h3> */}
 			{currDate 
 			? (
 			<React.Fragment>
@@ -149,14 +158,14 @@ function Month( props ) {
 			</React.Fragment>
 			)
 			: (
-				<div className='month__wrapper'>
+				<div className='month'>
 					<div className='days'>
 						{setDaysToTable()}
 					</div>
 					<div className='dates' onClick={clickHandler}>
 						{setDatesToTable()}
 					</div>
-					<div className='month__nav'>
+					<div className='nav'>
 						<button onClick={prevHandler}>Prev month</button>
 						<button onClick={nextHandler}>Next month</button>
 					</div>
