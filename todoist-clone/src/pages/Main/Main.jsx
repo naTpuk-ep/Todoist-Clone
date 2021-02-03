@@ -70,6 +70,10 @@ function Main(props) {
     }
   };
 
+  useEffect(() => {
+    getRandomTodo();
+  }, []);
+
   const submitRandomTodo = () => {
     if (randomTodo.title !== '') {
       const newTodo = {

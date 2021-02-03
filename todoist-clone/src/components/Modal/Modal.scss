@@ -60,11 +60,20 @@
 
 @media (max-width: 700px) {
   .Modal {
+    width: 90vw;
+
     form {
       .btns-block {
         margin-top: 10px;
         flex-basis: 100%;
       }
     }
+  }
+
+  .Modal_show {
+    background-color: #fff;
+    position: fixed;
+    bottom: 40vh;
+    opacity: 1;
   }
 }

@@ -17,7 +17,7 @@ function Nav(props) {
   return (
     <div className={navClassName}>
       <button className='close-btn' onClick={closeNav}>
-        &#65794;{' '}
+        &#65794;
       </button>
       <nav>
         <ul>
