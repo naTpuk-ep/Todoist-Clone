@@ -131,14 +131,14 @@ function App(props) {
               getToday={getToday}
             />
             <Switch>
-              <Route exact path='/'>
+              <Route exact path='/Todoist-Clone'>
                 <Main getToday={getToday} />
               </Route>
 
-              <Route path='/today'>
+              <Route path='/Todoist-Clone/today'>
                 <Today todos={todos} getToday={getToday} />
               </Route>
-              <Route path='/week'>
+              <Route path='/Todoist-Clone/week'>
                 <Week
                   todos={todos}
                   getToday={getToday}
@@ -147,7 +147,7 @@ function App(props) {
                   getDay={getDay}
                 />
               </Route>
-              <Route path='/month'>
+              <Route path='/Todoist-Clone/month'>
                 <Month
                   todos={todos}
                   getToday={getToday}
@@ -158,7 +158,7 @@ function App(props) {
                 />
               </Route>
 
-              <Route path='/login'>
+              <Route path='/Todoist-Clone/login'>
                 <Login authState={authState} />
               </Route>
             </Switch>

@@ -27,16 +27,16 @@ function Nav(props) {
             </button>
           </li>
           <li onClick={closeNav}>
-            <Link to='/'>Main</Link>
+            <Link to='/Todoist-Clone'>Main</Link>
           </li>
           <li onClick={closeNav}>
-            <Link to='/today'>Today</Link>
+            <Link to='/Todoist-Clone/today'>Today</Link>
           </li>
           <li onClick={closeNav}>
-            <Link to='/week'>Week</Link>
+            <Link to='/Todoist-Clone/week'>Week</Link>
           </li>
           <li onClick={closeNav}>
-            <Link to='/month'>Month</Link>
+            <Link to='/Todoist-Clone/month'>Month</Link>
           </li>
         </ul>
       </nav>
