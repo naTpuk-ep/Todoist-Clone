@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Todoist-Clone/static/css/main.b2266c3f.chunk.css",
+    "main.css": "/Todoist-Clone/static/css/main.2756b589.chunk.css",
     "main.js": "/Todoist-Clone/static/js/main.f878241c.chunk.js",
     "main.js.map": "/Todoist-Clone/static/js/main.f878241c.chunk.js.map",
     "runtime-main.js": "/Todoist-Clone/static/js/runtime-main.7ef41ab6.js",
@@ -12,7 +12,7 @@
     "static/js/3.528129a6.chunk.js.map": "/Todoist-Clone/static/js/3.528129a6.chunk.js.map",
     "index.html": "/Todoist-Clone/index.html",
     "static/css/2.23fe1579.chunk.css.map": "/Todoist-Clone/static/css/2.23fe1579.chunk.css.map",
-    "static/css/main.b2266c3f.chunk.css.map": "/Todoist-Clone/static/css/main.b2266c3f.chunk.css.map",
+    "static/css/main.2756b589.chunk.css.map": "/Todoist-Clone/static/css/main.2756b589.chunk.css.map",
     "static/js/2.4386dd31.chunk.js.LICENSE.txt": "/Todoist-Clone/static/js/2.4386dd31.chunk.js.LICENSE.txt",
     "static/js/3.528129a6.chunk.js.LICENSE.txt": "/Todoist-Clone/static/js/3.528129a6.chunk.js.LICENSE.txt",
     "static/media/complete_sound.17647a58.mp3": "/Todoist-Clone/static/media/complete_sound.17647a58.mp3",
@@ -23,7 +23,7 @@
     "static/js/runtime-main.7ef41ab6.js",
     "static/css/2.23fe1579.chunk.css",
     "static/js/2.4386dd31.chunk.js",
-    "static/css/main.b2266c3f.chunk.css",
+    "static/css/main.2756b589.chunk.css",
     "static/js/main.f878241c.chunk.js"
   ]
 }
