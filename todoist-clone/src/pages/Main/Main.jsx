@@ -12,7 +12,6 @@ function Main(props) {
   const { createTodo, getToday } = props;
 
   const [city, setCity] = useState('Minsk');
-  const [error, setError] = useState('');
   const [wData, setWData] = useState({
     temp: '',
     icon: '',
@@ -49,9 +48,8 @@ function Main(props) {
           icon: `owf owf-${res.data.weather[0].id} owf-5x`,
           desc: res.data.weather[0].description,
         }));
-        setError('');
       } catch (e) {
-        setError('Enter correct city');
+        console.log(e.message);
       }
     };
     getWeather();

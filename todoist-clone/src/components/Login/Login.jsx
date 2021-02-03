@@ -39,15 +39,6 @@ function Login(props) {
         [name]: value
     }));
   };
-  
-  // const testData = {
-  //   result: '',
-  // };
-  // const testHandler = async () => {
-  //   const result = await auth.test();
-  //   testData.result = result.statusCode === 200 ? 'ok' : 'fail';
-  //   setReason(result);
-  // };
 
   const registerHandler = async () => {
     const auth = await axios.post(
@@ -74,7 +65,7 @@ function Login(props) {
       />
       <input
       value={loginData.password}
-        type='text'
+        type='password'
         name='password'
         placeholder='Password'
         onChange={changeHandler}
