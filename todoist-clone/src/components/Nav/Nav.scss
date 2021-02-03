@@ -13,13 +13,17 @@
     top: 10px;
     left: 10px;
     color: white;
-    font-size: 4rem;
     border: none;
     background: none;
-    transition: 0.5s;
+    i {
+      font-size: 4rem;
+      transition: 0.5s;
+    }
   }
   .close-btn:hover {
-    transform: scale(1.3);
+    i {
+      transform: scale(1.3);
+    }
   }
   nav {
     height: 100%;

@@ -17,7 +17,7 @@ function Nav(props) {
   return (
     <div className={navClassName}>
       <button className='close-btn' onClick={closeNav}>
-        &#65794;
+        <i className='material-icons'>clear</i>
       </button>
       <nav>
         <ul>
