@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/Todoist-Clone/static/css/main.01a6a7d1.chunk.css",
+    "main.js": "/Todoist-Clone/static/js/main.74df6bc8.chunk.js",
+    "main.js.map": "/Todoist-Clone/static/js/main.74df6bc8.chunk.js.map",
+    "runtime-main.js": "/Todoist-Clone/static/js/runtime-main.864c4010.js",
+    "runtime-main.js.map": "/Todoist-Clone/static/js/runtime-main.864c4010.js.map",
+    "static/css/2.23fe1579.chunk.css": "/Todoist-Clone/static/css/2.23fe1579.chunk.css",
+    "static/js/2.48ce2468.chunk.js": "/Todoist-Clone/static/js/2.48ce2468.chunk.js",
+    "static/js/2.48ce2468.chunk.js.map": "/Todoist-Clone/static/js/2.48ce2468.chunk.js.map",
+    "static/js/3.05c4177a.chunk.js": "/Todoist-Clone/static/js/3.05c4177a.chunk.js",
+    "static/js/3.05c4177a.chunk.js.map": "/Todoist-Clone/static/js/3.05c4177a.chunk.js.map",
+    "index.html": "/Todoist-Clone/index.html",
+    "static/css/2.23fe1579.chunk.css.map": "/Todoist-Clone/static/css/2.23fe1579.chunk.css.map",
+    "static/css/main.01a6a7d1.chunk.css.map": "/Todoist-Clone/static/css/main.01a6a7d1.chunk.css.map",
+    "static/js/2.48ce2468.chunk.js.LICENSE.txt": "/Todoist-Clone/static/js/2.48ce2468.chunk.js.LICENSE.txt",
+    "static/js/3.05c4177a.chunk.js.LICENSE.txt": "/Todoist-Clone/static/js/3.05c4177a.chunk.js.LICENSE.txt",
+    "static/media/complete_sound.17647a58.mp3": "/Todoist-Clone/static/media/complete_sound.17647a58.mp3",
+    "static/media/delete_sound.028a6499.mp3": "/Todoist-Clone/static/media/delete_sound.028a6499.mp3",
+    "static/media/success_sound.98e5555b.mp3": "/Todoist-Clone/static/media/success_sound.98e5555b.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.864c4010.js",
+    "static/css/2.23fe1579.chunk.css",
+    "static/js/2.48ce2468.chunk.js",
+    "static/css/main.01a6a7d1.chunk.css",
+    "static/js/main.74df6bc8.chunk.js"
+  ]
+}
