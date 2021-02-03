@@ -16,10 +16,9 @@ import './App.scss';
 import Header from '../Header';
 import Nav from '../Nav';
 import Main from '../../pages/Main';
-import All from '../../pages/All';
 import Today from '../../pages/Today';
-import Upcoming from '../../pages/Upcoming';
 import Modal from '../Modal';
+import Spinner from '../Spinner';
 import Login from '../Login';
 import { auth } from '../../persistance/network';
 import Month from '../../pages/Month';
@@ -116,7 +115,7 @@ function App(props) {
   ];
 
   if (authState === null) {
-    return <h2>LOADING</h2>;
+    return <Spinner />;
   }
 
   if (authState && todos) {
@@ -135,9 +134,7 @@ function App(props) {
               <Route exact path='/'>
                 <Main getToday={getToday} />
               </Route>
-              <Route path='/all'>
-                <All todos={todos} />
-              </Route>
+
               <Route path='/today'>
                 <Today todos={todos} getToday={getToday} />
               </Route>
@@ -160,9 +157,7 @@ function App(props) {
                   getDay={getDay}
                 />
               </Route>
-              <Route path='/upcoming'>
-                <Upcoming todos={todos} getToday={getToday} />
-              </Route>
+
               <Route path='/login'>
                 <Login authState={authState} />
               </Route>

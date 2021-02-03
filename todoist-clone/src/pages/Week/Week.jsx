@@ -34,10 +34,12 @@ function Week(props) {
             id={day.toISOString()}
             className='day'
           >
-            <h3>
-              {days[getDay(day) - 1]}, {addZero(day.getDate())}.
-              {addZero(day.getMonth() + 1)}
-            </h3>
+            <div className='week-header'>
+              <h3>{days[getDay(day) - 1]}</h3>{' '}
+              <h3>
+                {addZero(day.getDate())}.{addZero(day.getMonth() + 1)}
+              </h3>
+            </div>
             <TodoList getDayTodos={getDayTodos(day)} />
           </div>
         );

@@ -7,8 +7,6 @@ import TodoList from '../../components/TodoList';
 function Today(props) {
   const { todos, getToday } = props;
 
-  console.log('today');
-
   let todayTodos = todos.filter((el) => el.date === getToday());
 
   return (

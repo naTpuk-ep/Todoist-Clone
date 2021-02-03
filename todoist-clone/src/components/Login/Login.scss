@@ -3,7 +3,18 @@
   margin: 0 auto;
   flex-direction: column;
   max-width: 300px;
-};
+  button {
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    background-color: white;
+    margin: 10px;
+  }
+  button:last-child {
+    background-color: #e44332;
+    color: white;
+  }
+}
 
 .reason {
   color: red;

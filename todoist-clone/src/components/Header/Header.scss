@@ -27,3 +27,13 @@
     font-size: 2rem;
   }
 }
+
+@media (max-width: 700px) {
+  .Header {
+    width: 100%;
+    justify-content: space-around;
+    h1 {
+      font-size: 3rem;
+    }
+  }
+}

@@ -32,6 +32,8 @@
     }
     .btns-block {
       flex-basis: 50%;
+      display: flex;
+      justify-content: center;
       button {
         width: 50px;
         height: 50px;
@@ -54,4 +56,15 @@
   position: fixed;
   bottom: 50vh;
   opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .Modal {
+    form {
+      .btns-block {
+        margin-top: 10px;
+        flex-basis: 100%;
+      }
+    }
+  }
 }

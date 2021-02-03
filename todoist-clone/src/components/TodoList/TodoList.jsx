@@ -19,7 +19,6 @@ function TodoList(props) {
       <div className='TodoList empty'>
         <img src={keepCalm} alt='calm' />
         <p>Enjoy your freetime</p>
-        <span>...</span>
       </div>
     );
   }

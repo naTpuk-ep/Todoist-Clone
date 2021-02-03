@@ -135,30 +135,33 @@ function Month(props) {
     <div className='Month'>
       {currDate ? (
         <React.Fragment>
-          <h3>
-            {currDate.date} {months[tableDate.month]} {currDate.year}
-          </h3>
+          <div className='month-header current-day'>
+            <button className='btn-back' onClick={backHandler}>
+              <i className='material-icons'>keyboard_backspace</i>
+            </button>
+            <h3>
+              {currDate.date} {months[tableDate.month]}{' '}
+              {currDate.year}
+            </h3>
+          </div>
           <TodoList todos={currDate.todos} />
-          <button className='btn-back' onClick={backHandler}>
-            <i className='material-icons'>keyboard_backspace</i>
-          </button>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <h3>{months[tableDate.month]}</h3>
+          <div className='month-header'>
+            <button className='btn-prev' onClick={prevHandler}>
+              <i className='material-icons'>keyboard_arrow_left</i>
+            </button>
+            <h3>{months[tableDate.month]}</h3>
+            <button className='btn-next' onClick={nextHandler}>
+              <i className='material-icons'>keyboard_arrow_right</i>
+            </button>
+          </div>
           <div className='calendar'>
             <div className='days'>{setDaysToTable()}</div>
             <div className='dates' onClick={clickHandler}>
               {setDatesToTable()}
             </div>
-          </div>
-          <div className='nav'>
-            <button className='btn-prev' onClick={prevHandler}>
-              <i className='material-icons'>keyboard_arrow_left</i>
-            </button>
-            <button className='btn-next' onClick={nextHandler}>
-              <i className='material-icons'>keyboard_arrow_right</i>
-            </button>
           </div>
         </React.Fragment>
       )}

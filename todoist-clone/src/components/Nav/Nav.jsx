@@ -29,17 +29,6 @@ function Nav(props) {
           <li onClick={closeNav}>
             <Link to='/'>Main</Link>
           </li>
-          {/* <li onClick={closeNav}>
-            <Link to='/all'>All</Link>
-          </li>
-          <li onClick={closeNav}>
-            <Link to='/today'>Today</Link>
-          </li>
-          <li onClick={closeNav}>
-            <Link to='/upcoming'>Upcoming</Link> */}
-          {/* <li>
-            <Link to='/all'>All</Link>
-          </li> */}
           <li onClick={closeNav}>
             <Link to='/today'>Today</Link>
           </li>

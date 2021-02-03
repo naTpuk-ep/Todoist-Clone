@@ -1,24 +1,47 @@
 .Week {
   .day {
+    width: 70%;
     margin: 0 auto;
-    margin-bottom: 20px;
-    h3 {
-      font-size: 2.5rem;
-      text-align: left;
-      color: silver;
+    .week-header {
+      display: flex;
+      justify-content: space-between;
       border-bottom: 2px solid silver;
-      padding: 0 0 20px 20px;
+      padding: 0 20px;
+      h3 {
+        font-size: 1.5rem;
+        color: silver;
+      }
+    }
+
+    .TodoList {
+      width: 90%;
+      margin: 0;
+      margin-left: auto;
     }
     .TodoList.empty {
+      display: flex;
+      align-items: center;
+      padding: 50px 0 0;
+      margin-bottom: -50px;
       img {
-        display: none;
+        width: 50px;
+        margin: 0;
       }
       p {
-        display: none;
+        font-size: 1rem;
+        margin-left: 30px;
       }
     }
   }
   .day:not(:first-child) {
     margin-top: 60px;
+  }
+}
+
+@media (max-width: 700px) {
+  .Week {
+    .day {
+      width: 90%;
+    }
   }
 }
