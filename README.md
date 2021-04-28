@@ -2,6 +2,7 @@
 
 run the app:  
 npm i  
+cd todoist-clone  
 npm start  
   
 Deploy: https://alexbibig.github.io/Todoist-Clone/  
