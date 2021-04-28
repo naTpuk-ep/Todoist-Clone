@@ -1,9 +1,11 @@
 # Todoist-Clone
 
 run the app:  
-git clone https://github.com/AlexBibig/Todoist-Clone  
-git checkout develop  
-cd todoist-clone  
-cd todoist-clone  
 npm i  
 npm start  
+  
+Deploy: https://alexbibig.github.io/Todoist-Clone/  
+  
+Back-End Repo: https://github.com/naTpuk-ep/rs-clone-be  
+  
+React, Redux, Node JS Express, PostgreSQL  
