@@ -1,8 +1,8 @@
-# Todoist-Clone
+# Todoist-Clone  
 
 run the app:  
-npm i  
 cd todoist-clone  
+npm i  
 npm start  
   
 Deploy: https://alexbibig.github.io/Todoist-Clone/  
